@@ -1,60 +1,56 @@
-# SideJITServer
-This project allows you to start a server that wirelessly or via USB gives you JIT for iOS 17+ on Windows/macOS/Linux if you use the correct newer pymobiledevice3 version.
+This is a fork, updated for my personal use. I cannot recommend it, but I do use it on my iPad 5th Gen and Windows.
 
-## How to get this running (Run with Administrator!)
-```
-python3 -m venv venv # Run inside SideJITStore directory!
+## Requirements:
 
-# Activate Python venv
+- Windows
+- iTunes and iCloud directly from Apple (not from the Microsoft Store). [See here for links](https://faq.altstore.io/getting-started/how-to-install-altstore-windows).
+- Python [latest](https://www.python.org/downloads/) version.
+    - `python --version` to check the installed Python version.
 
-# macOS
-. ./venv/bin/activate
+## Environment
 
-# Windows but using Powershell
-.\venv\Scripts\Activate.ps1
+1. **Launch PowerShell as an Administrator.**
+2. Navigate with `cd ~\Desktop`.
+3. Clone the repository: `git clone https://github.com/RobThePCGuy/SideJITServer.git`.
+4. Change directory with `cd SideJITServer`.
+5. Create and activate a virtual environment with Python:
+    ```powershell
+    python -m venv venv
+    .\venv\Scripts\Activate.ps1
+    ```
+    You should now see `(venv) PS` indicating that the virtual environment is activated.
+6. Install required packages:
+    ```powershell
+    pip install -r requirements.txt
+    pip install SideJITServer
+    pip install pymobiledevice3==4.10.11
+    ```
+7. Check the version of the server with `SideJITServer --version`.
 
-# Windows but using Command Prompt/CMD
-.\venv\Scripts\Activate.bat
+   **Expected output:** `pymobiledevice3: 4.10.11` and `SideJITServer: 1.3.1`.
 
-# Now let's install all the required packages! (Make sure you're still inside venv!)
-# All OS
-pip3 install -r requirements.txt
-pip3 install SideJITServer
-# If you got an error saying pip3 not found just change pip3 to pip
+## Pairing
 
-# Let's see if everything works (Make sure you're still inside venv!)
-SideJITServer --version
-# Output should show SideJITServer!
-```
+1. Connect your iPad to the PC and run `SideJITServer --pair`, then type in `y` at the prompt.
+   - You will have to hit the 'Trust' button on the Apple devices a couple times during this step.
+   - You will be given three different IP addresses if the server starts successfully.
+2. Open the default web browser on your Apple device and type that IP into the address bar, i.e., `http://192.168.1.164:8080/`.
+   - Acknowledge any popups on this page.
+3. Copy or write down your UUID, which is the 24 characters at the end, including the hyphen.
+    ```json
+    {"usbmux-########-################-USB":"########-################"}
+    ```
 
-Or use PyPI
-```
-python3 -m venv venv
-# Activate venv..
+## Follow Through
 
-pip3 install SideJITServer
-SideJITServer --help
-```
-# How to use SideJITServer?
-- Make sure your device is connected!
-- Make sure you're still inside the venv!
-- Common Knowledge
-  
-Now run `SideJITServer --pair` and on your PC make sure you click on Trust this PC!
-Also it will show you a prompt to continue just type "y"
-
-Now thats done, Install [this](https://www.icloud.com/shortcuts/b0ffc9c3f0e74e7a8f8052c89fa322cf) shortcut
-
-After that its gonna ask you to put on your device's UDID, Go to your PC and see your local ipaddress mine is `192.168.0.6:8080` and on your phone go to that (your local address) and copy the one that beside usbmux (example : 00001111-000A1100A11101A)
-
-Now it's gonna ask you for SideJIT Server address! Just type in the address you use earlier to access device's UDID
-
-for example : `http://192.168.0.6:8080` (You must include the http and not include / at the end!)
-
-Now run the shortcut!
-
-It gonna ask you to allow to access your local ip address just click allow!
-
-Now select the application that you want to give JIT access to and you're done! (might ask for notification. It is recommended that you allow so you see if the JIT fail or succeed)
-
-Happy JITing! :3
+1. On your Apple device, go to my repo, https://github.com/RobThePCGuy/SideJITServer
+2. Click [here](https://www.icloud.com/shortcuts/b0ffc9c3f0e74e7a8f8052c89fa322cf) to install the Shortcut.
+3. Select 'Set Up Shortcut'
+4. You will be asked for your device UUID, the 24 characters noted previously, similar to: `00001111-000A1100A11101A`.
+5. Next, you will need to enter the IP address for the SideJITServer.
+   - This is the same IP we used in the browser to get the UUID, i.e., `http://192.168.1.164:8080/`.
+     - You MUST enter the `http://` at the beginning as well as the `/` at the very end.
+7. Save the Shortcut, then find or search for the new 'SideJIT' Shortcut.
+   - Or just say "Hey Siri, SideJIT"
+9. Lastly, choose the app to give JIT permissions to.
+   - Choose AltStore or another application.
